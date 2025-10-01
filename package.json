@@ -1,5 +1,5 @@
 {
-  "name": "sheet-import",
+  "name": "obs-gsheets",
   "module": "index.ts",
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
