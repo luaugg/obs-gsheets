@@ -1,12 +1,13 @@
 # bun dependencies
-node_modules
+node_modules/
 
 # output
-out
-dist
+out/
+dist/
 *.tgz
+files/
 
 # env variables / test configs
 .env.*
 *.env
-private.config.toml
+config.toml

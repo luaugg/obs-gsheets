@@ -4,17 +4,12 @@ Imports Google Sheets values in a way OBS can deal with. Either as files as [She
 or by communicating over OBS's WebSocket Server as [obs-google-sheets-importer](https://github.com/DaBenjamins/obs-google-sheet-importer/) and [Companion](https://bitfocus.io/companion) do.
 
 # Running the project
-Download the latest release and uncompress it. Modify `config.toml` to suit your needs. The configuration is validated through [Zod](https://zod.dev/) upon startup; you'll get helpful messages if you've messed it up in some way.
+Download the latest release and uncompress it. Modify `config.toml` [according to the guide](CONFIGURATION.md).
 
-The only mandatory requirements of any config:
-- An API key with Google Sheets API access.
-- A spreadsheet & tab name.
-- Poll rate / update interval must be > 1000ms (defaults to 1500ms).
-
-Once saved and good to go, you can just run the batch script. Don't execute the .exe directly as you'll be oblivious to the console messages, nor any convenient way to end the process.
+Once saved and good to go, you can just run the batch script. Don't execute the .exe directly as you'll be oblivious to the console messages and lack a convenient way to end the process.
 
 # Contributing
-You'll need a recent version of [Bun](https://bun.com), 1.2+.
+You'll need [Bun](https://bun.com) 1.2+.
 All changes must be tested, and I'll only merge changes that have been formatted and linted through the associated [Biome](https://biomejs.dev/) config. An example command to do this:
 `bunx --bun biome check --write`
 

@@ -1,4 +1,3 @@
-import { mkdir } from 'node:fs/promises'
 import rawConfig from '../config.toml'
 import { ConfigSchema } from '../types/config'
 import { fetchSheetData, mapCellToIndices, requestUri } from './loader'
@@ -27,13 +26,6 @@ if (!wsEnabled && !fsEnabled) {
     'Both WebSocket (OBS) and Filesystem integrations are disabled. Nothing to do, exiting.'
   )
   process.exit(1)
-}
-
-if (fsEnabled) {
-  const filesDirExists = await Bun.file('./files').exists()
-  if (!filesDirExists) {
-    await mkdir('./files')
-  }
 }
 
 const id = setInterval(async () => {
