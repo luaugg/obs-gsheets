@@ -29,13 +29,12 @@ const cellValue = (row: number, col: number, data: string[][], dimension: 'ROWS'
   return dimension === 'ROWS' ? (data[row] ? data[row][col] : undefined) : data[col] ? data[col][row] : undefined
 }
 
-const id = setInterval(async () => {
+setInterval(async () => {
   const { status, data } = await fetchSheetData(uri)
 
   if (status !== 200) {
     console.error(`Error fetching sheet data: HTTP ${status} - unrecoverable, stopping further attempts.`)
-    clearInterval(id)
-    return
+    process.exit(1)
   }
 
   if (fsEnabled && config.fs?.cells && data) {
