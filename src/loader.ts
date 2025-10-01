@@ -5,13 +5,7 @@ export type Result = {
 
 export type Cell = [number, number]
 
-const requestUri = (
-  sheetId: string,
-  tabName: string,
-  range: string,
-  apiKey: string,
-  dimension: string
-) =>
+const requestUri = (sheetId: string, tabName: string, range: string, apiKey: string, dimension: string) =>
   `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${tabName}!${range}?key=${apiKey}&majorDimension=${dimension}`
 
 const fetchSheetData = async (uri: string): Promise<Result> => {
@@ -28,12 +22,10 @@ const fetchSheetData = async (uri: string): Promise<Result> => {
 }
 
 const mapCellToIndices = (cell: string): Cell => {
-  const match = cell.toUpperCase().match(/^([A-Z])([0-9]+)$/)
+  const match = cell.toUpperCase().match(/\|\s*([A-Z])([0-9]+)$/)
 
   if (!match || !match[1] || !match[2]) {
-    throw new Error(
-      `Invalid cell format: "${cell}". Expected format like "A1".`
-    )
+    throw new Error(`Invalid cell format: "${cell}". Expected format like "A1".`)
   }
 
   const col = match[1].charCodeAt(0) - 65 // 'A' is 65 in ASCII
