@@ -1,12 +1,17 @@
 {
   "name": "sheet-import",
   "module": "index.ts",
-  "type": "module",
-  "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@biomejs/biome": "2.2.4",
+    "@types/bun": "^1.2.23"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.9.2"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "obs-websocket-js": "^5.0.6",
+    "zod": "^4.1.11"
   }
 }

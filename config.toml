@@ -1,0 +1,18 @@
+api_key = "api key here"
+spreadsheet_id = "spreadsheet id here"
+tab_name = "Sheet1"
+range = "A1:Z1000"
+dimension = "ROWS"
+update_interval = 1500
+
+[obs]
+enabled = true
+host = "localhost"
+port = 4455
+password = ""
+
+[fs]
+enabled = true
+
+[fs.cells]
+cell_a1 = "A1"
