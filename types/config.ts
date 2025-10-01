@@ -6,10 +6,7 @@ export const ConfigSchema = z.object({
   tab_name: z.string(),
   range: z.string().default('A1:Z1000'),
   dimension: z.enum(['ROWS', 'COLUMNS']).default('ROWS'),
-  update_interval: z
-    .number()
-    .min(1000, 'Update interval must be at least 1000ms - recommend 1500ms')
-    .default(1500),
+  update_interval: z.number().min(1000, 'Update interval must be at least 1000ms - recommend 1500ms').default(1500),
   obs: z
     .object({
       enabled: z.boolean().default(true),
