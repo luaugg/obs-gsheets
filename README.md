@@ -22,5 +22,7 @@ If you want to bundle the project into a single production executable, use this 
 
 `bun build --compile src/index.ts --outfile server.exe`
 
-# Will you add support for \[some feature\]?
-Open an issue with your feature request and I'll see.
+# Shoutouts
+Special thanks to:
+- the creators of [SheetsIO](https://github.com/GrandyB/SheetsIO), for a list of all Google Sheets error values
+- the creators of [obs-google-sheet-importer](https://github.com/DaBenjamins/obs-google-sheet-importer) for some of the logic, e.g. changing colour sources
