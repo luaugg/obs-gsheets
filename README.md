@@ -5,8 +5,8 @@ or by communicating over OBS's WebSocket Server as [obs-google-sheets-importer](
 
 # Running the project
 Download the latest release and uncompress it. Modify `config.toml` [according to the guide](CONFIGURATION.md).
-
-Once saved and good to go, you can just run the batch script. Don't execute the .exe directly as you'll be oblivious to the console messages and lack a convenient way to end the process.
+Once saved, assuming you're running on Windows amd64, you can just double click on the `obs-gsheets.exe` file.
+The app must be in the same directory as the config file.
 
 # Contributing
 You'll need [Bun](https://bun.com) 1.2+.
