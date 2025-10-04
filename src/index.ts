@@ -30,6 +30,16 @@ const cellValue = (row: number, col: number, data: string[][], dimension: 'ROWS'
   return dimension === 'ROWS' ? (data[row] ? data[row][col] : undefined) : data[col] ? data[col][row] : undefined
 }
 
+const convertColorToOBS = (hex: string) => {
+  const match = hex.match(/^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i)
+  if (!match) {
+    return 0
+  }
+
+  // biome-ignore lint/style/noNonNullAssertion: false positive
+  return parseInt(`ff${match[3]!}${match[2]}${match[1]}`, 16)
+}
+
 setInterval(async () => {
   const { status, data } = await fetchSheetData(uri)
 
@@ -82,7 +92,6 @@ setInterval(async () => {
 
           newSettings.file = value
           break
-
         case 'text_gdiplus_v3':
         case 'text_ft2_source':
         case 'text_freetype2':
@@ -93,22 +102,24 @@ setInterval(async () => {
 
           newSettings.text = value
           break
-
         case 'color_source_v3':
         case 'color_source_v2':
         case 'color_source':
+          if (value === '') {
+            continue
+          }
+
           if (!/^#([0-9A-F]{6}|[0-9A-F]{8})$/i.test(value)) {
             console.warn(`${source.sourceName} does not contain a valid hex color ("${value}"). Skipping.`)
             continue
           }
 
-          if (newSettings.color === value) {
+          if (newSettings.color === convertColorToOBS(value)) {
             continue
           }
 
-          newSettings.color = value.replace('#', '')
+          newSettings.color = convertColorToOBS(value)
           break
-
         default:
           console.warn(`Source "${source.sourceName}" has unsupported input kind "${source.inputKind}". Skipping.`)
           continue
