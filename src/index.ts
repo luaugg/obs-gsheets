@@ -1,3 +1,4 @@
+import adze from 'adze'
 import { type OBSRequestTypes, OBSWebSocket } from 'obs-websocket-js'
 import rawConfig from '../config.toml'
 import { ConfigSchema } from '../types/config'
@@ -16,13 +17,13 @@ const wsEnabled = config.obs?.enabled ?? false
 const fsEnabled = config.fs?.enabled ?? false
 const uri = requestUri(config.spreadsheet_id, config.tab_name, config.range, config.api_key, config.dimension)
 
-console.log(`WebSocket (OBS) integration is ${wsEnabled ? 'enabled' : 'disabled'}.`)
-console.log(`Filesystem integration is ${fsEnabled ? 'enabled' : 'disabled'}.`)
-console.log(`Data source URI (incl. API key; unsanitized): ${uri}`)
-console.log(`Update interval set to ${config.update_interval}ms.`)
+adze.namespace('startup').info(`OBS integration is ${wsEnabled ? 'enabled' : 'disabled'}.`)
+adze.namespace('startup').info(`Filesystem integration is ${fsEnabled ? 'enabled' : 'disabled'}.`)
+adze.namespace('startup').info(`Data source URI (incl. API key; unsanitized): ${uri}`)
+adze.namespace('startup').info(`Update interval set to ${config.update_interval}ms.`)
 
 if (!wsEnabled && !fsEnabled) {
-  console.error('Both WebSocket (OBS) and Filesystem integrations are disabled. Nothing to do, exiting.')
+  adze.namespace('startup').error('Both WebSocket (OBS) and Filesystem integrations are disabled. Nothing to do, exiting.')
   process.exit(1)
 }
 
@@ -33,14 +34,14 @@ if (wsEnabled) {
   const port = config.obs?.port ?? 4455
   const password = config.obs?.password
   await obs.connect(`ws://${host}:${port}`, password)
-  console.log('Connected to OBS WebSocket server.')
+  adze.namespace('startup').success('Connected to OBS WebSocket server.')
 }
 
 setInterval(async () => {
   const { status, data } = await fetchSheetData(uri)
 
   if (status !== 200) {
-    console.error(`Error fetching sheet data: HTTP ${status} - unrecoverable, stopping further attempts.`)
+    adze.namespace('loop').error(`Error fetching sheet data: HTTP ${status} - unrecoverable, stopping further attempts.`)
     process.exit(1)
   }
 
@@ -50,7 +51,7 @@ setInterval(async () => {
       const value = valueAtRowCol(row, col, data, config.dimension)
 
       if (value === undefined) {
-        console.warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data. Skipping.`)
+        adze.namespace('loop').warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data. Skipping.`)
         continue
       }
 
@@ -66,12 +67,12 @@ setInterval(async () => {
       const value = valueAtRowCol(row, col, data, config.dimension)
 
       if (value === undefined) {
-        console.warn(`${source.sourceName} is out of bounds in the fetched data. Skipping.`)
+        adze.namespace('loop').warn(`${source.sourceName} is out of bounds in the fetched data. Skipping.`)
         continue
       }
 
       if (isErrorValue(value)) {
-        console.warn(`${source.sourceName} contains an error value ("${value}"). Skipping.`)
+        adze.namespace('loop').warn(`${source.sourceName} contains an error value ("${value}"). Skipping.`)
         continue
       }
 
@@ -82,6 +83,7 @@ setInterval(async () => {
         case 'xObsAsyncImageSource':
         case 'image_source':
           if (newSettings.file === value) {
+            adze.namespace('loop').verbose(`Source "${source.sourceName}" image path is already up to date. Skipping.`)
             continue
           }
 
@@ -93,6 +95,7 @@ setInterval(async () => {
         case 'text_freetype2':
         case 'text_gdiplus':
           if (newSettings.text === value) {
+            adze.namespace('loop').verbose(`Source "${source.sourceName}" text is already up to date. Skipping.`)
             continue
           }
 
@@ -102,7 +105,13 @@ setInterval(async () => {
         case 'color_source_v3':
         case 'color_source_v2':
         case 'color_source':
-          if (value === '' || newSettings.color === convertHexToOBSColor(newSettings.color, value)) {
+          if (value === '') {
+            adze.namespace('loop').warn(`Source "${source.sourceName}" has an empty color value. Skipping.`)
+            continue
+          }
+
+          if (newSettings.color === convertHexToOBSColor(newSettings.color, value)) {
+            adze.namespace('loop').verbose(`Source "${source.sourceName}" color is already up to date. Skipping.`)
             continue
           }
 
@@ -110,11 +119,12 @@ setInterval(async () => {
           break
 
         default:
-          console.warn(`Source "${source.sourceName}" has unsupported input kind "${source.inputKind}". Skipping.`)
+          adze.namespace('loop').warn(`Source "${source.sourceName}" has unsupported input kind "${source.inputKind}". Skipping.`)
           continue
       }
 
       if (JSON.stringify(response.inputSettings) === JSON.stringify(newSettings)) {
+        adze.namespace('loop').verbose(`Source "${source.sourceName}" settings are already up to date. Skipping.`)
         continue
       }
 
@@ -123,6 +133,7 @@ setInterval(async () => {
         inputSettings: newSettings
       }
 
+      adze.namespace('loop').debug(`Updating source "${source.sourceName}" with new value: ${value}`)
       await obs.call('SetInputSettings', req)
     }
   }
