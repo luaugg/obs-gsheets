@@ -37,7 +37,7 @@ spreadsheet_id = "Spreadsheet ID"   # The spreadsheet - must be viewable by anyo
 tab_name = "Sheet1"                 # What tab to read from.
 dimension = "ROWS"                  # Or COLUMNS. Don't change this without good reason.
 update_interval = 1500              # Lowest this can go is 1000ms.
-range = "A1!Z1000"                  # What range to collect values from. Best left alone.
+range = "A1:Z1000"                  # What range to collect values from. Best left alone.
 
 [obs]
 enabled = true                      # Enable the OBS WebSocket client?
