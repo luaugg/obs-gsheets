@@ -30,9 +30,6 @@ if (wsEnabled) {
   const host = config.obs?.host ?? 'localhost'
   const port = config.obs?.port ?? 4455
   const password = config.obs?.password
-
-  //adze.namespace('DEBUG').alert(`Connecting to OBS WebSocket server at ws://${host}:${port} WITH password ${password ? 'set' : 'NOT set'}`)
-
   await obs.connect(`ws://${host}:${port}`, password)
   adze.namespace('startup').success('Connected to OBS WebSocket server.')
 }
