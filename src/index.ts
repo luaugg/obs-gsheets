@@ -23,7 +23,9 @@ adze.namespace('startup').info(`Data source URI (incl. API key; unsanitized): ${
 adze.namespace('startup').info(`Update interval set to ${config.update_interval}ms.`)
 
 if (!wsEnabled && !fsEnabled) {
-  adze.namespace('startup').error('Both WebSocket (OBS) and Filesystem integrations are disabled. Nothing to do, exiting.')
+  adze
+    .namespace('startup')
+    .error('Both WebSocket (OBS) and Filesystem integrations are disabled. Nothing to do, exiting.')
   process.exit(1)
 }
 
@@ -41,7 +43,9 @@ setInterval(async () => {
   const { status, data } = await fetchSheetData(uri)
 
   if (status !== 200) {
-    adze.namespace('loop').error(`Error fetching sheet data: HTTP ${status} - unrecoverable, stopping further attempts.`)
+    adze
+      .namespace('loop')
+      .error(`Error fetching sheet data: HTTP ${status} - unrecoverable, stopping further attempts.`)
     process.exit(1)
   }
 
@@ -51,7 +55,9 @@ setInterval(async () => {
       const value = valueAtRowCol(row, col, data, config.dimension)
 
       if (value === undefined) {
-        adze.namespace('loop').warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data. Skipping.`)
+        adze
+          .namespace('loop')
+          .warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data. Skipping.`)
         continue
       }
 
@@ -119,7 +125,9 @@ setInterval(async () => {
           break
 
         default:
-          adze.namespace('loop').warn(`Source "${source.sourceName}" has unsupported input kind "${source.inputKind}". Skipping.`)
+          adze
+            .namespace('loop')
+            .warn(`Source "${source.sourceName}" has unsupported input kind "${source.inputKind}". Skipping.`)
           continue
       }
 
