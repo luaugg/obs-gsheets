@@ -2,7 +2,7 @@
 
 import type { OBSRequestTypes, OBSResponseTypes, OBSWebSocket } from 'obs-websocket-js'
 import type { JsonObject } from 'type-fest'
-import type { Cell, Dimension, Result, Sheet, SourceWithCell } from '../types/types'
+import type { Cell, Dimension, ErrorValue, Result, Sheet, SourceWithCell } from '../types/types'
 
 export async function fetchSheetData(uri: string): Promise<Result> {
   const headers = { 'Content-Type': 'application/json' }
@@ -80,4 +80,8 @@ export async function getBoundSources(obs: OBSWebSocket) {
         col
       } as SourceWithCell
     })
+}
+
+export function isErrorValue(value: string): value is ErrorValue {
+  return ['#N/A', '#VALUE!', '#REF!', '#DIV/0!', '#NUM!', '#NAME?', '#NULL!', '#ERROR!'].includes(value)
 }
