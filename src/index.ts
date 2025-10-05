@@ -1,10 +1,13 @@
+import { resolve } from 'node:path'
 import adze from 'adze'
 import { OBSWebSocket } from 'obs-websocket-js'
-import rawConfig from '../config.toml'
 import { ConfigSchema } from '../types/config'
 import { fsProcessCell, updateSource } from './updater'
 import { fetchSheetData, getBoundSources, requestUri } from './utils'
 
+const configPath = resolve(process.cwd(), 'config.toml')
+const configFile = Bun.file(configPath)
+const rawConfig = Bun.TOML.parse(await configFile.text())
 const config = ConfigSchema.parse(rawConfig)
 const wsEnabled = config.obs?.enabled ?? false
 const fsEnabled = config.fs?.enabled ?? false
