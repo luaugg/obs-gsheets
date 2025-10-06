@@ -1,8 +1,8 @@
-import adze from 'adze'
 import type OBSWebSocket from 'obs-websocket-js'
 import type { OBSRequestTypes } from 'obs-websocket-js'
 import type { JsonObject } from 'type-fest'
 import type { Dimension, Handler, Sheet, SourceWithCell } from '../types/types'
+import { logger } from './logger'
 import { cellNotationToIndices, convertHexToOBSColor, isErrorValue, valueAtRowCol } from './utils'
 
 export async function fsProcessCell(sheet: Sheet, key: string, cell: string, dimension: Dimension) {
@@ -10,7 +10,7 @@ export async function fsProcessCell(sheet: Sheet, key: string, cell: string, dim
   const value = valueAtRowCol(row, col, sheet, dimension)
 
   if (value === undefined) {
-    adze.namespace('fs').warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data.`)
+    logger().warn(`Cell ${cell} (mapped from "${key}") is out of bounds in the fetched data.`)
     return
   }
 
@@ -26,12 +26,12 @@ export async function updateSource(
 ) {
   const value = valueAtRowCol(row, col, sheet, dimension)
   if (value === undefined) {
-    adze.namespace('updater').debug(`${source.sourceName} is out of bounds in the fetched data. Skipping.`)
+    logger().debug(`${source.sourceName} is out of bounds in the fetched data. Skipping.`)
     return
   }
 
   if (isErrorValue(value)) {
-    adze.namespace('updater').debug(`${source.sourceName} contains an error value ("${value}"). Skipping.`)
+    logger().debug(`${source.sourceName} contains an error value ("${value}"). Skipping.`)
     return
   }
 
@@ -43,12 +43,12 @@ export async function updateSource(
   })
 
   if (!handler) {
-    adze.namespace('updater').warn(`No handler found for source kind "${source.inputKind}".`)
+    logger().warn(`No handler found for source kind "${source.inputKind}".`)
     return
   }
 
   if (!handler.update(newSettings, value)) {
-    adze.namespace('updater').verbose(`No changes made for source kind "${source.inputKind}".`)
+    logger().verbose(`No changes made for source kind "${source.inputKind}".`)
     return
   }
 
@@ -57,7 +57,7 @@ export async function updateSource(
     inputSettings: newSettings
   }
 
-  adze.namespace('updater').info(`Updating source "${source.sourceName}" with new value.`)
+  logger().info(`Updating source "${source.sourceName}" with new value.`)
   await obs.call('SetInputSettings', updateRequest)
 }
 

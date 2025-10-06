@@ -22,7 +22,15 @@ export const ConfigSchema = z.object({
       cells: z.record(z.string(), z.string()).default({})
     })
     .optional()
-    .default({ enabled: false, cells: {} })
+    .default({ enabled: false, cells: {} }),
+  logging: z
+    .object({
+      level: z.enum(['alert', 'error', 'warn', 'info', 'fail', 'success', 'log', 'debug', 'verbose']).default('log'),
+      format: z.enum(['pretty', 'json', 'common', 'standard']).default('pretty'),
+      sanitized: z.boolean().default(true)
+    })
+    .optional()
+    .default({ level: 'log', format: 'pretty', sanitized: true })
 })
 
 export type Config = z.infer<typeof ConfigSchema>

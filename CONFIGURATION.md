@@ -17,16 +17,16 @@ api_key = "API Key"
 spreadsheet_id = "Spreadsheet ID"
 tab_name = "Sheet1"
 
-[fs.cells]
-some_file_name = "A1"               # fs assumed to be enabled, as cells are configured.
+[obs]
+enabled = true
 ```
 
 This assumes:
 - your sheet is organised in rows
 - you don't want to interact with OBS over WebSocket
 - you want to poll Google Sheets every 1500ms
-- you wish to save a file at `files/some_file_name.txt` with the value of cell `A1` in `Sheet1`
-- that you're interested in the range `A1!Z1000`
+- you wish to enable the OBS integration
+- that you're interested in the range `A1:Z1000`
 
 # Specification / complete example
 
@@ -50,4 +50,25 @@ enabled = true                      # Enable writing cell values to disk?
 
 [fs.cells]
 some_file_name = "A1"               # Save `files/some_file_name.txt` with the contents of whatever is in cell A1.
+
+[logging]
+level = "log"                       # How important do logs have to be to pass the filter?
+format = "pretty"                   # How do we want to format logs?
+sanitized = true                    # Do we want to filter out the API key & spreadsheet URI?
+
+# Log level can be:
+# alert     - fatal
+# error     - errors
+# warn      - warnings
+# info      - generic info messages
+# success   - generic success messages
+# log       - generic logs
+# debug     - debugging logs
+# verbose   - ridiculous amount of logs
+
+# Log format can be:
+# pretty    - human readable, pretty logs
+# json      - machine readable, structured JSON (javascript object notation) logs
+# common    - conforming to the Common Log Format
+# standard  - human readable but formatted for console / terminal output
 ```
