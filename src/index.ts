@@ -16,10 +16,12 @@ const sanitized = config.logging?.sanitized ?? true
 const uri = requestUri(config.spreadsheet_id, config.tab_name, config.range, config.api_key, config.dimension)
 const logger = initLogger(config.logging?.level ?? 'log', config.logging?.format ?? 'pretty')
 
-const safeUri = sanitized ? uri
-  .replace(config.api_key, '***')
-  .replace(config.spreadsheet_id, '***') : uri
-const safeWsPassword = sanitized ? (config.obs?.password ? '(sanitized)' : '(none)') : (config.obs?.password ?? '(none)')
+const safeUri = sanitized ? uri.replace(config.api_key, '***').replace(config.spreadsheet_id, '***') : uri
+const safeWsPassword = sanitized
+  ? config.obs?.password
+    ? '(sanitized)'
+    : '(none)'
+  : (config.obs?.password ?? '(none)')
 
 logger.info(`OBS integration is ${wsEnabled ? 'enabled' : 'disabled'}.`)
 logger.info(`Filesystem integration is ${fsEnabled ? 'enabled' : 'disabled'}.`)
@@ -57,19 +59,19 @@ setInterval(async () => {
       logger.verbose('Successfully fetched sheet data.')
       break
     case 429:
-      logger.warn('Rate limited when fetching sheet data. Consider increasing the update interval.');
+      logger.warn('Rate limited when fetching sheet data. Consider increasing the update interval.')
       break
     case 403:
-      logger.error('Access forbidden when fetching sheet data. Check your API key and permissions.');
+      logger.error('Access forbidden when fetching sheet data. Check your API key and permissions.')
       break
     case 400:
-      logger.error('Bad request when fetching sheet data. Check your spreadsheet ID, tab name, and range.');
+      logger.error('Bad request when fetching sheet data. Check your spreadsheet ID, tab name, and range.')
       break
     case 404:
-      logger.error('Spreadsheet not found when fetching sheet data. Verify the spreadsheet ID and access rights.');
+      logger.error('Spreadsheet not found when fetching sheet data. Verify the spreadsheet ID and access rights.')
       break
     default:
-      logger.error(`Unexpected error fetching sheet data: HTTP ${status}`);
+      logger.error(`Unexpected error fetching sheet data: HTTP ${status}`)
       break
   }
 
