@@ -61,6 +61,7 @@ sanitized = true                    # Do we want to filter out the API key & spr
 # error     - errors
 # warn      - warnings
 # info      - generic info messages
+# fail      - generic fail messages
 # success   - generic success messages
 # log       - generic logs
 # debug     - debugging logs
