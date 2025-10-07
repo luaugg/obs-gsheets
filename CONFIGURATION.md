@@ -23,7 +23,6 @@ enabled = true
 
 This assumes:
 - your sheet is organised in rows
-- you don't want to interact with OBS over WebSocket
 - you want to poll Google Sheets every 1500ms
 - you wish to enable the OBS integration
 - that you're interested in the range `A1:Z1000`
