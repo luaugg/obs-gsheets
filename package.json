@@ -1,5 +1,6 @@
 {
   "name": "obs-gsheets",
+  "version": "0.1.1",
   "module": "index.ts",
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
