@@ -1,0 +1,46 @@
+# Sample Configuration for obs-gsheets
+# Copy this file and rename it to config.toml, then fill in your details.
+# This file must be in the directory where you ran the program from, which is usually the same directory as the executable.
+
+# Required: Google Sheets API credentials + spreadsheet details
+# Note: Spreadsheets must be publicly viewable (anyone with the link can view)
+api_key = "YOUR_API_KEY_HERE"
+spreadsheet_id = "YOUR_SPREADSHEET_ID_HERE"
+tab_name = "Sheet1"
+
+# Optional: Sheet configuration
+# Dimension can be either "ROWS" or "COLUMNS"
+# Update interval is in milliseconds - how often to check for updates. Minimum is 1000ms. Default is 1500ms.
+dimension = "ROWS"
+update_interval = 1500
+range = "A1:Z1000"
+
+# OBS WebSocket Integration
+# You can find your connection details in OBS Studio -> Tools -> WebSocket Server Settings.
+# Uncomment the password line if you've enabled authentication.
+[obs]
+enabled = true 
+host = "localhost"
+port = 4455
+# password = ""
+
+# Filesystem Integration - Write cell values to disk
+# If enabled, you can specify which cells to write to disk. See the [fs.cells] section below.
+[fs]
+enabled = true
+
+# Define which cells to write to files
+[fs.cells]
+# Format: file_name = "CellReference"
+# Example: team_1_name = "B2" will write the value of cell B2 to files/team_1_name.txt
+# team_1_name = "B2"
+
+# Logging Configuration
+# Log level options: alert, error, warn, info, fail, success, log, debug, verbose
+# Log format options: pretty, json, common, standard
+# Sanitized option will filter out the API key, spreadsheet URI, and WebSocket password from the logs.
+[logging]
+level = "log"
+format = "pretty"
+sanitized = true
+
