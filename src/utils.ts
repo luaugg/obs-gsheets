@@ -27,9 +27,10 @@ export function convertHexToOBSColor(previous: number, hex: string): number {
   const match = hex.match(/^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})?$/i)
   if (!match) return previous
 
-  return match[4] ?
-    parseInt(`${match[4]}${match[3]}${match[2]}${match[1]}`, 16) :  // ABGR format
-    parseInt(`ff${match[3]}${match[2]}${match[1]}`, 16)             // ABGR, assuming full opacity
+  return match[4]
+    ? parseInt(`${match[4]}${match[3]}${match[2]}${match[1]}`, 16)
+    : // ABGR format
+      parseInt(`ff${match[3]}${match[2]}${match[1]}`, 16) // ABGR, assuming full opacity
 }
 
 export function requestUri(
