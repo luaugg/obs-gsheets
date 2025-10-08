@@ -6,13 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
+    <width>381</width>
     <height>364</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>382</width>
+    <width>381</width>
+    <height>364</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>381</width>
     <height>364</height>
    </size>
   </property>
@@ -85,6 +91,15 @@
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="api_key">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Google API key</string>
+        </property>
+        <property name="whatsThis">
+         <string>A Google API key with permission and access to the Google Sheets API.</string>
+        </property>
         <property name="inputMask">
          <string notr="true"/>
         </property>
@@ -92,24 +107,33 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>API Key with Google Sheets API enabled</string>
+         <string>API key with Google Sheets enabled</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Spreadsheet URL</string>
+         <string>Spreadsheet ID</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="spreadsheet_url">
+       <widget class="QLineEdit" name="spreadsheet_id">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Spreadsheet ID</string>
+        </property>
+        <property name="whatsThis">
+         <string>The ID of your Google Spreadsheet. The sheet this refers to must be set such that anyone with a link can view it.</string>
+        </property>
         <property name="text">
          <string/>
         </property>
         <property name="placeholderText">
-         <string>Publicly viewable link to the spreadsheet</string>
+         <string>Your spreadsheet's ID. Must be visible to all</string>
         </property>
        </widget>
       </item>
@@ -122,6 +146,15 @@
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="tab_name">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Spreadsheet tab name</string>
+        </property>
+        <property name="whatsThis">
+         <string>Tab name (lower left corner) of your Google spreadsheet.</string>
+        </property>
         <property name="inputMask">
          <string/>
         </property>
@@ -142,6 +175,15 @@
       </item>
       <item row="3" column="1">
        <widget class="QLineEdit" name="range">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Value range</string>
+        </property>
+        <property name="whatsThis">
+         <string>Range of values to collect in A1 notation. By default, this is A1:Z1000.</string>
+        </property>
         <property name="inputMask">
          <string notr="true"/>
         </property>
@@ -162,6 +204,12 @@
       </item>
       <item row="4" column="1">
        <widget class="QSpinBox" name="update_interval">
+        <property name="statusTip">
+         <string>Update interval in milliseconds</string>
+        </property>
+        <property name="whatsThis">
+         <string>How often to poll Google Sheets. The lowest this can go is 1000ms, but 1500ms is recommended.</string>
+        </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::ButtonSymbols::PlusMinus</enum>
         </property>
@@ -191,20 +239,26 @@
       </item>
       <item row="5" column="1">
        <widget class="QComboBox" name="dimension">
+        <property name="statusTip">
+         <string>Sheet dimension - order by rows or by columns</string>
+        </property>
+        <property name="whatsThis">
+         <string>Return results ordered by row or by column. Rows is the default.</string>
+        </property>
         <property name="currentText">
-         <string>ROWS</string>
+         <string>Rows</string>
         </property>
         <property name="placeholderText">
          <string/>
         </property>
         <item>
          <property name="text">
-          <string>ROWS</string>
+          <string>Rows</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>COLUMNS</string>
+          <string>Columns</string>
          </property>
         </item>
        </widget>
@@ -291,6 +345,15 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLineEdit" name="server">
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Server host</string>
+           </property>
+           <property name="whatsThis">
+            <string>The server host. Like with the port, you can leave this alone most of the time.</string>
+           </property>
            <property name="placeholderText">
             <string>localhost</string>
            </property>
@@ -298,6 +361,12 @@
          </item>
          <item>
           <widget class="QSpinBox" name="port">
+           <property name="statusTip">
+            <string>Server port</string>
+           </property>
+           <property name="whatsThis">
+            <string>The server port. You can leave this alone most of the time.</string>
+           </property>
            <property name="showGroupSeparator" stdset="0">
             <bool>false</bool>
            </property>
@@ -322,6 +391,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QCheckBox" name="auth_enabled">
+           <property name="statusTip">
+            <string>Toggle authentication</string>
+           </property>
+           <property name="whatsThis">
+            <string>Whether or not to try connecting with a password. Enabling this will allow you to edit the password box.</string>
+           </property>
            <property name="text">
             <string> Enabled?</string>
            </property>
@@ -329,6 +404,15 @@
          </item>
          <item>
           <widget class="QLineEdit" name="password">
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Password</string>
+           </property>
+           <property name="whatsThis">
+            <string>Password required to connect to OBS. Becomes editable when you tick the Enabled box.</string>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -403,11 +487,20 @@
            <height>29</height>
           </size>
          </property>
+         <property name="statusTip">
+          <string>Link to the latest release of obs-gsheets</string>
+         </property>
+         <property name="whatsThis">
+          <string>Link to the latest release of obs-gsheets.</string>
+         </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;v0.2.0 - &lt;a href=&quot;https://github.com/luaugg/obs-gsheets/releases/latest&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#f0c0f4;&quot;&gt;check for updates!&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::TextFormat::RichText</enum>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -418,6 +511,9 @@
            <width>50</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="statusTip">
+          <string>Select a config.toml configuration file</string>
          </property>
          <property name="text">
           <string>Browse</string>
@@ -431,6 +527,9 @@
            <width>50</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="statusTip">
+          <string>Start the update loop</string>
          </property>
          <property name="text">
           <string>Start</string>
@@ -451,6 +550,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="statusTip">
+          <string>Stop the update loop</string>
+         </property>
          <property name="text">
           <string>Stop</string>
          </property>
@@ -461,8 +563,25 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="status_bar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>auth_enabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>password</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

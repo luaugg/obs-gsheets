@@ -1,15 +1,49 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
-from generated import widget
+import tomllib
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PySide6.QtCore import Slot
+from generated import widget_ui as widget
+from config import Config
 
-class MainWindow(QMainWindow):
+class Window(QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super(Window, self).__init__()
         self.ui = widget.Ui_MainWindow()
         self.ui.setupUi(self)
 
+    @Slot()
+    def on_browse_clicked(self):
+        selected_file, _ = QFileDialog.getOpenFileName(self, "Open Configuration File (config.toml)", "", "TOML Files (*.toml)")
+        if not selected_file:
+            return
+        
+        print(f"Selected file: {selected_file}")
+        with open(selected_file, "rb") as f:
+            config = tomllib.load(f)
+            password = config.get("obs.password")
+            self.ui.api_key.setText(config.get("api_key"))
+            self.ui.spreadsheet_id.setText(config.get("spreadsheet_id"))
+            self.ui.tab_name.setText(config.get("tab_name"))
+            self.ui.range.setText(config.get("range", "A1:Z1000"))
+            self.ui.update_interval.setValue(int(config.get("update_interval", 1500)))
+            self.ui.dimension.setCurrentText(str(config.get("dimension", "ROWS")).upper())
+            self.ui.server.setText(config.get("obs.host", "localhost"))
+            self.ui.port.setValue(int(config.get("obs.port", 4455)))
+            if password:
+                self.ui.password.setText(password)
+                self.ui.auth_enabled.setChecked(True)
+            elif password is None:
+                self.ui.password.setText("")
+                self.ui.auth_enabled.setChecked(False)
+                
+            config_obj = Config()
+            config_obj.update_from_ui(self.ui)
+            config_obj.validate()
+            print("Configuration is valid")
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = Window()
     window.show()
+    window.ui.start.clicked.connect(lambda: print("Started [lambda]!"))
     sys.exit(app.exec())

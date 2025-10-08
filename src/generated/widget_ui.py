@@ -62,11 +62,11 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_3)
 
-        self.spreadsheet_url = QLineEdit(self.formLayoutWidget)
-        self.spreadsheet_url.setObjectName(u"spreadsheet_url")
-        self.spreadsheet_url.setAcceptDrops(False)
+        self.spreadsheet_id = QLineEdit(self.formLayoutWidget)
+        self.spreadsheet_id.setObjectName(u"spreadsheet_id")
+        self.spreadsheet_id.setAcceptDrops(False)
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.spreadsheet_url)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.spreadsheet_id)
 
         self.label_4 = QLabel(self.formLayoutWidget)
         self.label_4.setObjectName(u"label_4")
@@ -203,6 +203,7 @@ class Ui_MainWindow(object):
         self.label_14.setObjectName(u"label_14")
         self.label_14.setMaximumSize(QSize(389, 29))
         self.label_14.setTextFormat(Qt.TextFormat.RichText)
+        self.label_14.setOpenExternalLinks(True)
 
         self.horizontalLayout_3.addWidget(self.label_14)
 
@@ -235,6 +236,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.status_bar)
 
         self.retranslateUi(MainWindow)
+        self.auth_enabled.toggled.connect(self.password.setEnabled)
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -250,16 +252,16 @@ class Ui_MainWindow(object):
         self.api_key.setWhatsThis(QCoreApplication.translate("MainWindow", u"A Google API key with permission and access to the Google Sheets API.", None))
 #endif // QT_CONFIG(whatsthis)
         self.api_key.setText("")
-        self.api_key.setPlaceholderText(QCoreApplication.translate("MainWindow", u"API Key with Google Sheets API enabled", None))
+        self.api_key.setPlaceholderText(QCoreApplication.translate("MainWindow", u"API key with Google Sheets enabled", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Spreadsheet ID", None))
 #if QT_CONFIG(statustip)
-        self.spreadsheet_url.setStatusTip(QCoreApplication.translate("MainWindow", u"Spreadsheet ID", None))
+        self.spreadsheet_id.setStatusTip(QCoreApplication.translate("MainWindow", u"Spreadsheet ID", None))
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(whatsthis)
-        self.spreadsheet_url.setWhatsThis(QCoreApplication.translate("MainWindow", u"The ID of your Google Spreadsheet. The sheet this refers to must be set such that anyone with a link can view it.", None))
+        self.spreadsheet_id.setWhatsThis(QCoreApplication.translate("MainWindow", u"The ID of your Google Spreadsheet. The sheet this refers to must be set such that anyone with a link can view it.", None))
 #endif // QT_CONFIG(whatsthis)
-        self.spreadsheet_url.setText("")
-        self.spreadsheet_url.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Your spreadsheet's ID. Must be visible to all", None))
+        self.spreadsheet_id.setText("")
+        self.spreadsheet_id.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Your spreadsheet's ID. Must be visible to all", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Tab Name", None))
 #if QT_CONFIG(statustip)
         self.tab_name.setStatusTip(QCoreApplication.translate("MainWindow", u"Spreadsheet tab name", None))
