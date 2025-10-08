@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "njpwerner.autodocstring",
+        "charliermarsh.ruff",
+        "ms-python.black-formatter",
+        "seanwu.vscode-qt-for-python",
+        "fill-labs.dependi",
+    ]
+}
