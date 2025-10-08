@@ -106,6 +106,9 @@
         <property name="text">
          <string/>
         </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+        </property>
         <property name="placeholderText">
          <string>API key with Google Sheets enabled</string>
         </property>
@@ -131,6 +134,9 @@
         </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
         </property>
         <property name="placeholderText">
          <string>Your spreadsheet's ID. Must be visible to all</string>
@@ -413,6 +419,9 @@
            <property name="whatsThis">
             <string>Password required to connect to OBS. Becomes editable when you tick the Enabled box.</string>
            </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -566,22 +575,5 @@
   <widget class="QStatusBar" name="status_bar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>auth_enabled</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>password</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>274</x>
-     <y>290</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -54,6 +54,7 @@ class Ui_MainWindow(object):
         self.api_key.setObjectName(u"api_key")
         self.api_key.setAcceptDrops(False)
         self.api_key.setInputMask(u"")
+        self.api_key.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.api_key)
 
@@ -65,6 +66,7 @@ class Ui_MainWindow(object):
         self.spreadsheet_id = QLineEdit(self.formLayoutWidget)
         self.spreadsheet_id.setObjectName(u"spreadsheet_id")
         self.spreadsheet_id.setAcceptDrops(False)
+        self.spreadsheet_id.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.spreadsheet_id)
 
@@ -175,6 +177,7 @@ class Ui_MainWindow(object):
         self.password = QLineEdit(self.formLayoutWidget_2)
         self.password.setObjectName(u"password")
         self.password.setAcceptDrops(False)
+        self.password.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
         self.password.setReadOnly(True)
 
         self.horizontalLayout.addWidget(self.password)
@@ -236,7 +239,6 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.status_bar)
 
         self.retranslateUi(MainWindow)
-        self.auth_enabled.toggled.connect(self.password.setEnabled)
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
