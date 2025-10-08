@@ -1,0 +1,7 @@
+[project]
+name = "obs-gsheets-py"
+version = "0.2.0"
+description = "OBS Google Sheets integration."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
