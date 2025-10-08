@@ -1,4 +1,4 @@
-class Config():
+class Config:
     def __init__(self):
         self.api_key = None
         self.spreadsheet_id = None

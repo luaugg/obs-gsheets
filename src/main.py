@@ -1,9 +1,12 @@
 import sys
 import tomllib
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+
 from PySide6.QtCore import Slot
-from generated import widget_ui as widget
+from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow
+
 from config import Config
+from generated import widget_ui as widget
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -15,10 +18,12 @@ class Window(QMainWindow):
 
     @Slot()
     def on_browse_clicked(self):
-        selected_file, _ = QFileDialog.getOpenFileName(self, "Open Configuration File (config.toml)", "", "TOML Files (*.toml)")
+        selected_file, _ = QFileDialog.getOpenFileName(
+            self, "Open Configuration File (config.toml)", "", "TOML Files (*.toml)"
+        )
         if not selected_file:
             return
-        
+
         with open(selected_file, "rb") as f:
             config = tomllib.load(f)
             config_obj = Config()
@@ -35,6 +40,7 @@ class Window(QMainWindow):
             self.ui.password.setText(password)
             config_obj.update_from_ui(self.ui)
             config_obj.validate()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

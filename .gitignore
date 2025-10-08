@@ -8,7 +8,3 @@ wheels/
 
 # Virtual environments
 .venv/
-
-# Editor stuff
-.idea/
-.vscode/
