@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>381</width>
+    <height>364</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>381</width>
+    <height>364</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>381</width>
+    <height>364</height>
+   </size>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>obs-gsheets</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>381</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:700;&quot;&gt;Google Sheet Details&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>381</width>
+       <height>157</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="verticalSpacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>API Key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="api_key">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Google API key</string>
+        </property>
+        <property name="whatsThis">
+         <string>A Google API key with permission and access to the Google Sheets API.</string>
+        </property>
+        <property name="inputMask">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+        </property>
+        <property name="placeholderText">
+         <string>API key with Google Sheets enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Spreadsheet ID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="spreadsheet_id">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Spreadsheet ID</string>
+        </property>
+        <property name="whatsThis">
+         <string>The ID of your Google Spreadsheet. The sheet this refers to must be set such that anyone with a link can view it.</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Your spreadsheet's ID. Must be visible to all</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Tab Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="tab_name">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Spreadsheet tab name</string>
+        </property>
+        <property name="whatsThis">
+         <string>Tab name (lower left corner) of your Google spreadsheet.</string>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Tab to read from - e.g. Sheet1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Range</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="range">
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Value range</string>
+        </property>
+        <property name="whatsThis">
+         <string>Range of values to collect in A1 notation. By default, this is A1:Z1000.</string>
+        </property>
+        <property name="inputMask">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Range of values in A1 notation - e.g. A1:B2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Update Interval</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="update_interval">
+        <property name="statusTip">
+         <string>Update interval in milliseconds</string>
+        </property>
+        <property name="whatsThis">
+         <string>How often to poll Google Sheets. The lowest this can go is 1000ms, but 1500ms is recommended.</string>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::ButtonSymbols::PlusMinus</enum>
+        </property>
+        <property name="specialValueText">
+         <string/>
+        </property>
+        <property name="suffix">
+         <string>ms</string>
+        </property>
+        <property name="minimum">
+         <number>1000</number>
+        </property>
+        <property name="maximum">
+         <number>60000</number>
+        </property>
+        <property name="singleStep">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Dimension</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="dimension">
+        <property name="statusTip">
+         <string>Sheet dimension - order by rows or by columns</string>
+        </property>
+        <property name="whatsThis">
+         <string>Return results ordered by row or by column. Rows is the default.</string>
+        </property>
+        <property name="currentText">
+         <string>Rows</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+        <item>
+         <property name="text">
+          <string>Rows</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Columns</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>271</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt;API Key, Spreadsheet URL and Tab Name are required.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::TextFormat::RichText</enum>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>200</y>
+       <width>381</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:700;&quot;&gt;OBS WebSocket Server Details&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>381</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <property name="verticalSpacing">
+        <number>2</number>
+       </property>
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Server</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLineEdit" name="server">
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Server host</string>
+           </property>
+           <property name="whatsThis">
+            <string>The server host. Like with the port, you can leave this alone most of the time.</string>
+           </property>
+           <property name="placeholderText">
+            <string>localhost</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="port">
+           <property name="statusTip">
+            <string>Server port</string>
+           </property>
+           <property name="whatsThis">
+            <string>The server port. You can leave this alone most of the time.</string>
+           </property>
+           <property name="showGroupSeparator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="maximum">
+            <number>65535</number>
+           </property>
+           <property name="value">
+            <number>4455</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Authentication</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QCheckBox" name="auth_enabled">
+           <property name="statusTip">
+            <string>Toggle authentication</string>
+           </property>
+           <property name="whatsThis">
+            <string>Whether or not to try connecting with a password. Enabling this will allow you to edit the password box.</string>
+           </property>
+           <property name="text">
+            <string> Enabled?</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="password">
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="statusTip">
+            <string>Password</string>
+           </property>
+           <property name="whatsThis">
+            <string>Password required to connect to OBS. Becomes editable when you tick the Enabled box.</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Password (if there is one)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>271</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt;OBS Studio -&amp;gt; Tools -&amp;gt; WebSocket Server Settings&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::TextFormat::RichText</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>310</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>381</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_14">
+         <property name="maximumSize">
+          <size>
+           <width>389</width>
+           <height>29</height>
+          </size>
+         </property>
+         <property name="statusTip">
+          <string>Link to the latest release of obs-gsheets</string>
+         </property>
+         <property name="whatsThis">
+          <string>Link to the latest release of obs-gsheets.</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;v0.2.0 - &lt;a href=&quot;https://github.com/luaugg/obs-gsheets/releases/latest&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#f0c0f4;&quot;&gt;check for updates!&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::TextFormat::RichText</enum>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browse">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="statusTip">
+          <string>Select a config.toml configuration file</string>
+         </property>
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="start">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="statusTip">
+          <string>Start the update loop</string>
+         </property>
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="stop">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="statusTip">
+          <string>Stop the update loop</string>
+         </property>
+         <property name="text">
+          <string>Stop</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="status_bar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

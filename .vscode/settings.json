@@ -1,0 +1,15 @@
+{
+    "python.formatting.provider": "none",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
+        }
+    },
+    "black-formatter.args": ["--line-length=120"],
+    "ruff.nativeServer": true,
+    "ruff.lint.enable": true,
+    "ruff.lint.run": "onSave"
+}

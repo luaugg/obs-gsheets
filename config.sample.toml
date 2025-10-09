@@ -1,0 +1,11 @@
+api_key = "YOUR_API_KEY_HERE"
+spreadsheet_id = "YOUR_SPREADSHEET_ID_HERE"
+tab_name = "Sheet1"
+dimension = "ROWS"
+update_interval = 1500
+range = "A1:Z1000"
+
+[obs]
+host = "localhost"
+port = 4455
+password = ""

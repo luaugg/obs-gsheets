@@ -1,0 +1,28 @@
+[project]
+name = "obs-gsheets"
+version = "0.2.0"
+description = "OBS Google Sheets integration."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "altgraph==0.17.4",
+    "certifi==2025.10.5",
+    "charset-normalizer==3.4.3",
+    "idna==3.10",
+    "obsws-python==1.8.0",
+    "ordered-set==4.1.0",
+    "packaging==25.0",
+    "pefile==2023.2.7",
+    "pyinstaller==6.16.0",
+    "pyinstaller-hooks-contrib==2025.9",
+    "pyside6==6.10.0",
+    "pyside6-addons==6.10.0",
+    "pyside6-essentials==6.10.0",
+    "pywin32-ctypes==0.2.3",
+    "requests==2.32.5",
+    "setuptools==80.9.0",
+    "shiboken6==6.10.0",
+    "urllib3==2.5.0",
+    "websocket-client==1.9.0",
+    "zstandard==0.25.0",
+]
