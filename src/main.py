@@ -15,6 +15,7 @@ class Window(QMainWindow):
         self.ui.setupUi(self)
         self.ui.auth_enabled.toggled.connect(lambda checked: self.ui.password.setReadOnly(not checked))
         self.ui.password.setReadOnly(not self.ui.auth_enabled.isChecked())
+        self.config = Config()
 
     @Slot()
     def on_browse_clicked(self):
@@ -26,7 +27,6 @@ class Window(QMainWindow):
 
         with open(selected_file, "rb") as f:
             config = tomllib.load(f)
-            config_obj = Config()
             password = config.get("obs.password")
             self.ui.api_key.setText(config.get("api_key"))
             self.ui.spreadsheet_id.setText(config.get("spreadsheet_id"))
@@ -38,8 +38,40 @@ class Window(QMainWindow):
             self.ui.port.setValue(int(config.get("obs.port", 4455)))
             self.ui.auth_enabled.setChecked(bool(password))
             self.ui.password.setText(password)
-            config_obj.update_from_ui(self.ui)
-            config_obj.validate()
+            self.config.update_from_ui(self.ui)
+
+    @Slot()
+    def on_start_clicked(self):
+        self.config.validate()
+        self.ui.start.setEnabled(False)
+        self.ui.browse.setEnabled(False)
+        self.ui.api_key.setReadOnly(True)
+        self.ui.spreadsheet_id.setReadOnly(True)
+        self.ui.tab_name.setReadOnly(True)
+        self.ui.range.setReadOnly(True)
+        self.ui.update_interval.setReadOnly(True)
+        self.ui.dimension.setEnabled(False)
+        self.ui.server.setReadOnly(True)
+        self.ui.port.setReadOnly(True)
+        self.ui.auth_enabled.setEnabled(False)
+        self.ui.password.setReadOnly(True)
+        self.ui.status.setText("Started!")
+
+    @Slot()
+    def on_stop_clicked(self):
+        self.ui.start.setEnabled(True)
+        self.ui.browse.setEnabled(True)
+        self.ui.api_key.setReadOnly(False)
+        self.ui.spreadsheet_id.setReadOnly(False)
+        self.ui.tab_name.setReadOnly(False)
+        self.ui.range.setReadOnly(False)
+        self.ui.update_interval.setReadOnly(False)
+        self.ui.dimension.setEnabled(True)
+        self.ui.server.setReadOnly(False)
+        self.ui.port.setReadOnly(False)
+        self.ui.auth_enabled.setEnabled(True)
+        self.ui.password.setReadOnly(not self.ui.auth_enabled.isChecked())
+        self.ui.status.setText("Stopped.")
 
 
 if __name__ == "__main__":
