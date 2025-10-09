@@ -21,6 +21,7 @@ class Config:
         self.obs_host = ui.server.text()
         self.obs_port = int(ui.port.text())
         self.obs_password = ui.password.text()
+        self.auth_enabled = ui.auth_enabled.isChecked()
 
     def validate(self):
         if not self.api_key:

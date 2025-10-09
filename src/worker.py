@@ -2,7 +2,7 @@ import logging
 
 from PySide6.QtCore import QObject, QThread, Slot
 
-from websocket import OBSConnection
+from loader import OBSConnection
 
 
 class Worker(QObject):
@@ -17,25 +17,14 @@ class Worker(QObject):
     @Slot()
     def start(self):
         self.running = True
-        self.obs = OBSConnection(
-            host=self.config["obs_host"],
-            port=self.config["obs_port"],
-            password=self.config["obs_password"],
-            sheet_id=self.config["sheet_id"],
-            tab_name=self.config["tab_name"],
-            range=self.config["range"],
-            api_key=self.config["api_key"],
-            dimension=self.config["dimension"],
-            log_level=logging.DEBUG,
-        )
-
+        self.obs = OBSConnection(self.config)
         self.logger.info("Worker started.")
         while self.running:
             data = self.obs.fetch_sheet_data()
             if data:
-                self.obs.update_sources(data, self.config["dimension"])
+                self.obs.update_sources(data, self.config.dimension)
 
-            QThread.msleep(self.config["update_interval"])
+            QThread.msleep(self.config.update_interval)
 
     @Slot()
     def stop(self):

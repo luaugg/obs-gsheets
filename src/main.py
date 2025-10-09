@@ -30,15 +30,16 @@ class Window(QMainWindow):
 
         with open(selected_file, "rb") as f:
             config = tomllib.load(f)
-            password = config.get("obs.password")
+            obs_config = config.get("obs", {})
+            password = obs_config.get("password", None)
             self.ui.api_key.setText(config.get("api_key"))
             self.ui.spreadsheet_id.setText(config.get("spreadsheet_id"))
             self.ui.tab_name.setText(config.get("tab_name"))
             self.ui.range.setText(config.get("range", "A1:Z1000"))
             self.ui.update_interval.setValue(int(config.get("update_interval", 1500)))
             self.ui.dimension.setCurrentText(str(config.get("dimension", "ROWS")).upper())
-            self.ui.server.setText(config.get("obs.host", "localhost"))
-            self.ui.port.setValue(int(config.get("obs.port", 4455)))
+            self.ui.server.setText(obs_config.get("host", "localhost"))
+            self.ui.port.setValue(int(obs_config.get("port", 4455)))
             self.ui.auth_enabled.setChecked(bool(password))
             self.ui.password.setText(password)
             self.config.update_from_ui(self.ui)
@@ -63,7 +64,6 @@ class Window(QMainWindow):
         self.ui.port.setReadOnly(True)
         self.ui.auth_enabled.setEnabled(False)
         self.ui.password.setReadOnly(True)
-        self.ui.status.setText("Started!")
 
     @Slot()
     def on_stop_clicked(self):
@@ -84,12 +84,10 @@ class Window(QMainWindow):
         self.ui.port.setReadOnly(False)
         self.ui.auth_enabled.setEnabled(True)
         self.ui.password.setReadOnly(not self.ui.auth_enabled.isChecked())
-        self.ui.status.setText("Stopped.")
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = Window()
     window.show()
-    window.ui.start.clicked.connect(lambda: print("Started [lambda]!"))
     sys.exit(app.exec())
